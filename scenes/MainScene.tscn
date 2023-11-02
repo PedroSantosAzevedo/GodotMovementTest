@@ -1,0 +1,86 @@
+[gd_scene load_steps=11 format=3 uid="uid://byaf4ea43gpry"]
+
+[ext_resource type="PackedScene" uid="uid://b8bbrhamaq3ld" path="res://scenes/Enemy.tscn" id="1_l7a0s"]
+[ext_resource type="PackedScene" uid="uid://bq8exj1vup3kc" path="res://scenes/EnemyManager.tscn" id="2_0ugmx"]
+[ext_resource type="PackedScene" uid="uid://bhqx3l0hp3c75" path="res://scenes/Player2.0.tscn" id="3_oxo01"]
+
+[sub_resource type="CSharpScript" id="CSharpScript_w41ux"]
+script/source = "using Godot;
+using System;
+
+public partial class Node3D : Godot.Node3D
+{
+	// Called when the node enters the scene tree for the first time.
+	public override void _Ready()
+	{
+		
+	}
+
+	// Called every frame. 'delta' is the elapsed time since the previous frame.
+	public override void _Process(double delta)
+	{
+	}
+}
+"
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_2ean5"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_66v6c"]
+sky_material = SubResource("ProceduralSkyMaterial_2ean5")
+
+[sub_resource type="Environment" id="Environment_q5mg5"]
+background_mode = 2
+sky = SubResource("Sky_66v6c")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_o0e3e"]
+vertices = PackedVector3Array(-4.5, 0.913589, 0.5, -2.25, 0.913589, 0.5, -2, 0.913589, -0.5, -4.5, 0.913589, -4.5, 2, 0.913589, -0.5, 2.25, 0.913589, 0.5, 4.5, 0.913589, 0.5, 4.5, 0.913589, -4.5, -2, 0.913589, -0.5, 2, 0.913589, -0.5, 4.5, 0.913589, -4.5, -4.5, 0.913589, -4.5, 4.5, 0.913589, 0.5, 2.25, 0.913589, 0.5, 2, 0.913589, 1.75, 4.5, 0.913589, 4.5, -2, 0.913589, 1.75, -2.25, 0.913589, 0.5, -4.5, 0.913589, 0.5, -4.5, 0.913589, 4.5, 2, 0.913589, 1.75, -2, 0.913589, 1.75, -4.5, 0.913589, 4.5, 4.5, 0.913589, 4.5)
+polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 3), PackedInt32Array(5, 4, 6), PackedInt32Array(6, 4, 7), PackedInt32Array(8, 11, 9), PackedInt32Array(9, 11, 10), PackedInt32Array(13, 12, 14), PackedInt32Array(14, 12, 15), PackedInt32Array(17, 16, 18), PackedInt32Array(18, 16, 19), PackedInt32Array(20, 23, 21), PackedInt32Array(21, 23, 22)]
+
+[sub_resource type="ORMMaterial3D" id="ORMMaterial3D_3dhf8"]
+albedo_color = Color(0.164063, 0.164063, 0.351563, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fw1f3"]
+albedo_color = Color(0, 0, 0.219608, 1)
+
+[node name="MainScene" type="Node3D"]
+script = SubResource("CSharpScript_w41ux")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.62388, -0.720455, 0.302851, 0, 0.387516, 0.921863, -0.78152, 0.575132, -0.241763, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_q5mg5")
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+transform = Transform3D(4.72932, 0, 0, 0, 1.04943, 0, 0, 0, 4.05474, 0.218268, 0.15419, 0.48773)
+navigation_mesh = SubResource("NavigationMesh_o0e3e")
+
+[node name="Floor" type="CSGBox3D" parent="NavigationRegion3D"]
+use_collision = true
+size = Vector3(10, 1, 10)
+
+[node name="ramp" type="CSGBox3D" parent="NavigationRegion3D"]
+transform = Transform3D(0.321598, 0, 0, 0, 0.795827, 0.558314, 0, -0.135644, 0.219421, -0.0461521, -0.146927, -0.120286)
+use_collision = true
+size = Vector3(10, 1, 10)
+material = SubResource("ORMMaterial3D_3dhf8")
+
+[node name="ramp2" type="CSGBox3D" parent="NavigationRegion3D"]
+transform = Transform3D(0.321598, 0, 0, 0, -0.935946, 0.110892, 0, -0.0292366, -0.237793, -0.0461521, -0.146927, -0.120286)
+use_collision = true
+size = Vector3(10, 1, 10)
+material = SubResource("StandardMaterial3D_fw1f3")
+
+[node name="Enemy" parent="." instance=ExtResource("1_l7a0s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.41728, -2.73749, 11.2875)
+
+[node name="EnemyManager" parent="." instance=ExtResource("2_0ugmx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0760536, -0.172712, -0.0965185)
+
+[node name="Player2_0" parent="." instance=ExtResource("3_oxo01")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.1153, -6.7168)
