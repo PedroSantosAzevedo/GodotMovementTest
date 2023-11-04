@@ -20,7 +20,7 @@ albedo_color = Color(1, 0, 1, 1)
 metallic = 1.0
 metallic_specular = 0.0
 
-[node name="Player2_0" type="Node3D"]
+[node name="Player" type="Node3D"]
 script = ExtResource("1_q1eck")
 
 [node name="PlayerCharacterBody3D" type="CharacterBody3D" parent="."]

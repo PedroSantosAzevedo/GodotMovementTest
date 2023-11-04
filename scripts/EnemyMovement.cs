@@ -24,6 +24,8 @@ public partial class EnemyMovement : CharacterBody3D
 	public override void _Ready()
 	{
 		navigationAgent = GetNode<NavigationAgent3D>("NavigationAgent3D");
+		connectToConeVisionSignal();
+		
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -41,7 +43,7 @@ public partial class EnemyMovement : CharacterBody3D
 
 	public Node3D GetPlayerNode()
 	{
-		return GetNodeOrNull<Node3D>("/root/MainScene/Player2_0/PlayerCharacterBody3D");
+		return GetNodeOrNull<Node3D>("/root/MainScene/Player/PlayerCharacterBody3D");
 	}
 
 	
@@ -64,5 +66,17 @@ public partial class EnemyMovement : CharacterBody3D
 		var direction = navigationAgent.GetNextPathPosition() - GlobalPosition;
 		direction = direction.Normalized();
 		Velocity = Velocity.Lerp(direction * speed, accel * (float)delta);
+	}
+
+	void connectToConeVisionSignal() {
+		Node3D coneOfVision = GetNode<Node3D>("FieldOfVision");
+		if (coneOfVision != null) {
+			coneOfVision.Connect("EnemyFieldOfVisionPlayerEnterSignal", new Callable(this, "EnemyFieldOfVisionCalled"));
+		}
+	}
+
+	void EnemyFieldOfVisionCalled() {
+		GD.Print("player did enter cone of vision");
+
 	}
 }

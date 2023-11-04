@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://b8bbrhamaq3ld"]
+[gd_scene load_steps=12 format=3 uid="uid://b8bbrhamaq3ld"]
 
 [ext_resource type="Script" path="res://scripts/EnemyMovement.cs" id="1_bbxr1"]
-[ext_resource type="Script" path="res://scripts/Enemy.cs" id="1_hnjkf"]
+[ext_resource type="Script" path="res://scenes/EnemyFieldOfVision.cs" id="2_01yyd"]
+[ext_resource type="PackedScene" uid="uid://dtle66csie2bw" path="res://scenes/cone.tscn" id="3_ef5dm"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4uur1"]
 albedo_color = Color(0, 0, 0.572549, 1)
@@ -23,31 +24,61 @@ metallic_specular = 0.85
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_nid1h"]
 material = SubResource("StandardMaterial3D_dbniv")
 
-[node name="Enemy" type="Node3D"]
-script = ExtResource("1_hnjkf")
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_xh5nd"]
+points = PackedVector3Array(0, 1, 0, 0.194988, -1, -0.980814, 0, -1, -1, -0.195184, -1, -0.980814, -0.382733, -1, -0.924041, -0.555599, -1, -0.831637, -0.707126, -1, -0.707126, -0.831637, -1, -0.555599, -0.924041, -1, -0.382733, -0.980814, -1, -0.195184, -1, -1, -0.000195742, -0.980814, -1, 0.194988, -0.924041, -1, 0.382537, -0.831637, -1, 0.555403, -0.707126, -1, 0.70693, -0.555599, -1, 0.831441, -0.382733, -1, 0.923845, -0.195184, -1, 0.980619, -0.000195742, -1, 1, 0.194988, -1, 0.980619, 0.382537, -1, 0.923845, 0.555403, -1, 0.831441, 0.70693, -1, 0.70693, 0.831441, -1, 0.555403, 0.923845, -1, 0.382537, 0.980619, -1, 0.194988, 1, -1, -0.000195742, 0.980619, -1, -0.195184, 0.923845, -1, -0.382733, 0.831441, -1, -0.555599, 0.70693, -1, -0.707126, 0.555403, -1, -0.831637, 0.382537, -1, -0.924041)
 
-[node name="Enemy" type="Node3D" parent="."]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0wqkq"]
+albedo_color = Color(1, 0.0980392, 0.0431373, 1)
+
+[node name="Enemy" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.5014, 0)
 
-[node name="CharacterBody3D" type="CharacterBody3D" parent="Enemy"]
+[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
 transform = Transform3D(1.00083, 0, 0, 0, 1.00083, 0, 0, 0, 1.00083, 0, 0, 0)
 floor_stop_on_slope = false
 floor_max_angle = 1.70868
 script = ExtResource("1_bbxr1")
 speed = 2
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Enemy/CharacterBody3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0213122, -0.000572683)
 mesh = SubResource("CapsuleMesh_wvifx")
 skin = SubResource("Skin_phjhu")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Enemy/CharacterBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0303338, 0)
 shape = SubResource("ConvexPolygonShape3D_23xsk")
 
-[node name="Face" type="MeshInstance3D" parent="Enemy/CharacterBody3D"]
+[node name="Face" type="MeshInstance3D" parent="CharacterBody3D"]
 transform = Transform3D(0.00170649, 0.460196, 0, -0.399073, 0.00196786, 0, 0, 0, 0.434582, 0, 0.34985, 0.478742)
 mesh = SubResource("CapsuleMesh_nid1h")
 
-[node name="NavigationAgent3D" type="NavigationAgent3D" parent="Enemy/CharacterBody3D"]
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="CharacterBody3D"]
 avoidance_enabled = true
+
+[node name="FieldOfVision" type="Area3D" parent="CharacterBody3D"]
+transform = Transform3D(0.999171, 0, 0, 0, 0.999171, 0, 0, 0, 0.999171, 0, 0, 0)
+script = ExtResource("2_01yyd")
+
+[node name="FieldOfVisionCollisionShape" type="CollisionShape3D" parent="CharacterBody3D/FieldOfVision"]
+transform = Transform3D(5.00415, 0, 0, 0, -2.18738e-07, 5.00415, 0, -5.00415, -2.18738e-07, 0, 0.152956, 4.56203)
+visible = false
+shape = SubResource("ConvexPolygonShape3D_xh5nd")
+
+[node name="FieldOfVisionMesh" parent="CharacterBody3D/FieldOfVision" instance=ExtResource("3_ef5dm")]
+transform = Transform3D(5.00415, 0, 0, 0, -2.18738e-07, 5.00415, 0, -5.00415, -2.18738e-07, 0, 0.152956, 4.56203)
+material_override = SubResource("StandardMaterial3D_0wqkq")
+transparency = 0.85
+cast_shadow = 0
+
+[node name="Timer" type="Timer" parent="CharacterBody3D/FieldOfVision"]
+wait_time = 0.25
+autostart = true
+
+[node name="VisionRaycast" type="RayCast3D" parent="CharacterBody3D/FieldOfVision"]
+exclude_parent = false
+target_position = Vector3(0, 0, -1000)
+debug_shape_custom_color = Color(0, 0.654902, 0, 1)
+debug_shape_thickness = 5
+
+[connection signal="timeout" from="CharacterBody3D/FieldOfVision/Timer" to="CharacterBody3D/FieldOfVision" method="OnTimerTimeout"]

@@ -37,7 +37,7 @@ tonemap_mode = 2
 glow_enabled = true
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_o0e3e"]
-vertices = PackedVector3Array(-4.5, 0.913589, 0.5, -2.25, 0.913589, 0.5, -2, 0.913589, -0.5, -4.5, 0.913589, -4.5, 2, 0.913589, -0.5, 2.25, 0.913589, 0.5, 4.5, 0.913589, 0.5, 4.5, 0.913589, -4.5, -2, 0.913589, -0.5, 2, 0.913589, -0.5, 4.5, 0.913589, -4.5, -4.5, 0.913589, -4.5, 4.5, 0.913589, 0.5, 2.25, 0.913589, 0.5, 2, 0.913589, 1.75, 4.5, 0.913589, 4.5, -2, 0.913589, 1.75, -2.25, 0.913589, 0.5, -4.5, 0.913589, 0.5, -4.5, 0.913589, 4.5, 2, 0.913589, 1.75, -2, 0.913589, 1.75, -4.5, 0.913589, 4.5, 4.5, 0.913589, 4.5)
+vertices = PackedVector3Array(-4.50212, 0.913589, 0.494515, -2.25212, 0.913589, 0.494515, -2.00212, 0.913589, -0.505485, -4.50212, 0.913589, -4.50549, 1.99788, 0.913589, -0.505485, 2.24788, 0.913589, 0.494515, 4.49788, 0.913589, 0.494515, 4.49788, 0.913589, -4.50549, -2.00212, 0.913589, -0.505485, 1.99788, 0.913589, -0.505485, 4.49788, 0.913589, -4.50549, -4.50212, 0.913589, -4.50549, 4.49788, 0.913589, 0.494515, 2.24788, 0.913589, 0.494515, 1.99788, 0.913589, 1.74451, 4.49788, 0.913589, 4.49451, -2.00212, 0.913589, 1.74451, -2.25212, 0.913589, 0.494515, -4.50212, 0.913589, 0.494515, -4.50212, 0.913589, 4.49451, 1.99788, 0.913589, 1.74451, -2.00212, 0.913589, 1.74451, -4.50212, 0.913589, 4.49451, 4.49788, 0.913589, 4.49451)
 polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 3), PackedInt32Array(5, 4, 6), PackedInt32Array(6, 4, 7), PackedInt32Array(8, 11, 9), PackedInt32Array(9, 11, 10), PackedInt32Array(13, 12, 14), PackedInt32Array(14, 12, 15), PackedInt32Array(17, 16, 18), PackedInt32Array(18, 16, 19), PackedInt32Array(20, 23, 21), PackedInt32Array(21, 23, 22)]
 
 [sub_resource type="ORMMaterial3D" id="ORMMaterial3D_3dhf8"]
@@ -61,6 +61,7 @@ transform = Transform3D(4.72932, 0, 0, 0, 1.04943, 0, 0, 0, 4.05474, 0.218268, 0
 navigation_mesh = SubResource("NavigationMesh_o0e3e")
 
 [node name="Floor" type="CSGBox3D" parent="NavigationRegion3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00211815, -4.47035e-07, -0.00548521)
 use_collision = true
 size = Vector3(10, 1, 10)
 
@@ -77,10 +78,14 @@ size = Vector3(10, 1, 10)
 material = SubResource("StandardMaterial3D_fw1f3")
 
 [node name="Enemy" parent="." instance=ExtResource("1_l7a0s")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.41728, -2.73749, 11.2875)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.41728, 2.33793, 11.2875)
 
 [node name="EnemyManager" parent="." instance=ExtResource("2_0ugmx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0760536, -0.172712, -0.0965185)
 
-[node name="Player2_0" parent="." instance=ExtResource("3_oxo01")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.1153, -6.7168)
+[node name="Player" parent="." instance=ExtResource("3_oxo01")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.115, -7.027)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(4.69523, 0, -0.0600539, 0, 5.68338, 0, 0.0930222, 0, 3.03117, 13.5423, 1.62173, -0.978839)
+use_collision = true
