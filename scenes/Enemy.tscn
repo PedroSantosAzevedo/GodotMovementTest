@@ -1,6 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://b8bbrhamaq3ld"]
+[gd_scene load_steps=13 format=3 uid="uid://b8bbrhamaq3ld"]
 
 [ext_resource type="Script" path="res://scripts/EnemyMovement.cs" id="1_bbxr1"]
+[ext_resource type="Script" path="res://scenes/EnemyController.cs" id="1_fd7li"]
 [ext_resource type="Script" path="res://scenes/EnemyFieldOfVision.cs" id="2_01yyd"]
 [ext_resource type="PackedScene" uid="uid://dtle66csie2bw" path="res://scenes/cone.tscn" id="3_ef5dm"]
 
@@ -32,6 +33,7 @@ albedo_color = Color(1, 0.0980392, 0.0431373, 1)
 
 [node name="Enemy" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.5014, 0)
+script = ExtResource("1_fd7li")
 
 [node name="CharacterBody3D" type="CharacterBody3D" parent="."]
 transform = Transform3D(1.00083, 0, 0, 0, 1.00083, 0, 0, 0, 1.00083, 0, 0, 0)

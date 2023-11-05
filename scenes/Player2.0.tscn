@@ -26,6 +26,7 @@ script = ExtResource("1_q1eck")
 [node name="PlayerCharacterBody3D" type="CharacterBody3D" parent="."]
 transform = Transform3D(1.001, 0, 0, 0, 1.001, 0, 0, 0, 1.001, 0, 0, 0)
 script = ExtResource("2_5ngo5")
+movement_speed = 350
 jump_strength = 10.0
 rotationSpeed = 1.0
 deltaRotation = 0.1
