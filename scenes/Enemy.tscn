@@ -1,9 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://b8bbrhamaq3ld"]
+[gd_scene load_steps=14 format=3 uid="uid://b8bbrhamaq3ld"]
 
 [ext_resource type="Script" path="res://scripts/EnemyMovement.cs" id="1_bbxr1"]
 [ext_resource type="Script" path="res://scenes/EnemyController.cs" id="1_fd7li"]
 [ext_resource type="Script" path="res://scenes/EnemyFieldOfVision.cs" id="2_01yyd"]
 [ext_resource type="PackedScene" uid="uid://dtle66csie2bw" path="res://scenes/cone.tscn" id="3_ef5dm"]
+[ext_resource type="Script" path="res://scenes/TestConeOfVision.cs" id="5_wx7r7"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4uur1"]
 albedo_color = Color(0, 0, 0.572549, 1)
@@ -59,6 +60,7 @@ mesh = SubResource("CapsuleMesh_nid1h")
 avoidance_enabled = true
 
 [node name="FieldOfVision" type="Area3D" parent="CharacterBody3D"]
+process_mode = 4
 transform = Transform3D(0.999171, 0, 0, 0, 0.999171, 0, 0, 0, 0.999171, 0, 0, 0)
 script = ExtResource("2_01yyd")
 
@@ -69,6 +71,7 @@ shape = SubResource("ConvexPolygonShape3D_xh5nd")
 
 [node name="FieldOfVisionMesh" parent="CharacterBody3D/FieldOfVision" instance=ExtResource("3_ef5dm")]
 transform = Transform3D(5.00415, 0, 0, 0, -2.18738e-07, 5.00415, 0, -5.00415, -2.18738e-07, 0, 0.152956, 4.56203)
+visible = false
 material_override = SubResource("StandardMaterial3D_0wqkq")
 transparency = 0.85
 cast_shadow = 0
@@ -79,8 +82,16 @@ autostart = true
 
 [node name="VisionRaycast" type="RayCast3D" parent="CharacterBody3D/FieldOfVision"]
 exclude_parent = false
-target_position = Vector3(0, 0, -1000)
+target_position = Vector3(0, 0, -10)
 debug_shape_custom_color = Color(0, 0.654902, 0, 1)
 debug_shape_thickness = 5
+
+[node name="ConeOfVision" type="Node3D" parent="CharacterBody3D"]
+script = ExtResource("5_wx7r7")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D/ConeOfVision"]
+
+[node name="ConeOfVisionLearn" type="Node3D" parent="CharacterBody3D"]
+visible = false
 
 [connection signal="timeout" from="CharacterBody3D/FieldOfVision/Timer" to="CharacterBody3D/FieldOfVision" method="OnTimerTimeout"]

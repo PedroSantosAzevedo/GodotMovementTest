@@ -41,6 +41,7 @@ public partial class EnemyFieldOfVision : Area3D
 			if (visionRaycast.IsColliding()) {
 				var collider = (Node3D)visionRaycast.GetCollider();
 				if (collider.GetParent().Name == "Player") {
+					
 					EmitSignal("EnemyFieldOfVisionPlayerEnterSignal");
 				}
 			}

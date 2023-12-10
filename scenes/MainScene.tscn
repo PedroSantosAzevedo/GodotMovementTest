@@ -1,7 +1,6 @@
-[gd_scene load_steps=11 format=3 uid="uid://byaf4ea43gpry"]
+[gd_scene load_steps=10 format=3 uid="uid://byaf4ea43gpry"]
 
 [ext_resource type="PackedScene" uid="uid://b8bbrhamaq3ld" path="res://scenes/Enemy.tscn" id="1_l7a0s"]
-[ext_resource type="PackedScene" uid="uid://bq8exj1vup3kc" path="res://scenes/EnemyManager.tscn" id="2_0ugmx"]
 [ext_resource type="PackedScene" uid="uid://bhqx3l0hp3c75" path="res://scenes/Player2.0.tscn" id="3_oxo01"]
 
 [sub_resource type="CSharpScript" id="CSharpScript_w41ux"]
@@ -50,7 +49,7 @@ albedo_color = Color(0, 0, 0.219608, 1)
 script = SubResource("CSharpScript_w41ux")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.62388, -0.720455, 0.302851, 0, 0.387516, 0.921863, -0.78152, 0.575132, -0.241763, 0, 0, 0)
+transform = Transform3D(-0.62388, 0.192625, 0.75741, 0, 0.969149, -0.246475, -0.78152, -0.153771, -0.604633, -16.8357, 9.05554, 13.4398)
 shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -80,12 +79,9 @@ material = SubResource("StandardMaterial3D_fw1f3")
 [node name="Enemy" parent="." instance=ExtResource("1_l7a0s")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.41728, 2.33793, 11.2875)
 
-[node name="EnemyManager" parent="." instance=ExtResource("2_0ugmx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0760536, -0.172712, -0.0965185)
-
 [node name="Player" parent="." instance=ExtResource("3_oxo01")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.115, -7.027)
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
-transform = Transform3D(4.69523, 0, -0.0600539, 0, 5.68338, 0, 0.0930222, 0, 3.03117, 13.5423, 1.62173, -0.978839)
+transform = Transform3D(4.69523, 0, -0.0600539, 0, 5.68338, 0, 0.0930222, 0, 3.03117, 6.02925, 0.630006, 16.0144)
 use_collision = true

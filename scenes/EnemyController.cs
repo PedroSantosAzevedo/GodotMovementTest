@@ -23,7 +23,7 @@ public partial class EnemyController : Node3D
 
 	public override void _PhysicsProcess(double delta)
 	{
-		getEnemyCharacterBody().FollowTarget(delta);
+		// getEnemyCharacterBody().FollowTarget(delta);
 	}
 
 	public void getComponents() {

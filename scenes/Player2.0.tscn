@@ -24,7 +24,7 @@ metallic_specular = 0.0
 script = ExtResource("1_q1eck")
 
 [node name="PlayerCharacterBody3D" type="CharacterBody3D" parent="."]
-transform = Transform3D(1.001, 0, 0, 0, 1.001, 0, 0, 0, 1.001, 0, 0, 0)
+transform = Transform3D(1.001, 0, 0, 0, 1.001, 0, 0, 0, 1.001, -0.0336456, -0.187531, 0.186596)
 script = ExtResource("2_5ngo5")
 movement_speed = 350
 jump_strength = 10.0
@@ -46,7 +46,7 @@ skeleton = NodePath("../PlayerBodyMeshInstance3D")
 surface_material_override/0 = SubResource("StandardMaterial3D_jb5tt")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-1, 5.33212e-08, -6.92791e-08, 0, 0.79246, 0.609924, 8.74228e-08, 0.609924, -0.79246, 0.00088437, 6.96591, -7.35277)
+transform = Transform3D(-1, 5.33213e-08, -6.92791e-08, 0, 0.79246, 0.609924, 8.74228e-08, 0.609924, -0.79246, 0.00088437, 6.96591, -7.35277)
 script = ExtResource("3_f6unm")
 playerNodePath = NodePath("../PlayerCharacterBody3D")
 cameraMultiplier = 1.0
