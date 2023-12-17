@@ -9,7 +9,7 @@ public partial class TestConeOfVision : Node3D
     public float VisionRange = 15;
 	[Export]
     public float VisionAngle = 90;
-    // public LayerMask VisionObstructingLayer;
+   
     public int VisionConeResolution = 119;
 	[Export]
 	public MeshInstance3D meshInstance;
@@ -18,7 +18,7 @@ public partial class TestConeOfVision : Node3D
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(double delta)
     {
-        // DrawVisionCone();
+      
     }
 
     public override void _PhysicsProcess(double delta)
@@ -53,28 +53,21 @@ public partial class TestConeOfVision : Node3D
             Vector3 raycastDirection = GlobalTransform.Basis.Z * cosine + GlobalTransform.Basis.X * sine;
             Vector3 raycastDirectionLine = Transform.Basis.Z * cosine + Transform.Basis.X * sine;
             Vector3 endpoint;
-            
-            var random =new Random();
-            float randomDistance = random.Next(30);
-
 
             float distance;
 
             if (Raycast(raycastDirection, out Vector3 hitPosition, VisionRange))
             {
-                
-                // endpoint = raycastDirection * randomDistance;
-                distance = GlobalTransform.Origin.DistanceTo(hitPosition);
-               endpoint = raycastDirection * distance;
+               distance = GlobalTransform.Origin.DistanceTo(hitPosition);
+               endpoint = raycastDirectionLine * distance;
             }
             else
             {
-                endpoint = raycastDirection * VisionRange;
-                //  endpoint = raycastDirection * randomDistance;
+                endpoint = raycastDirectionLine * VisionRange;
                 distance = VisionRange;
             }
     
-            // DrawLine(raycastDirectionLine, distance);
+            DrawLine(raycastDirectionLine, distance);
 
             visionPolygon[i + 1] = endpoint;
 

@@ -30,7 +30,7 @@ public partial class EnemyMovement : CharacterBody3D
 
 	public override void _PhysicsProcess(double delta)
 	{
-		// FollowTarget(delta);
+		FollowTarget(delta);
 	}
 
 
